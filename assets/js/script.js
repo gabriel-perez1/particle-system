@@ -34,7 +34,6 @@ class particle {
     // first paramater is speed in x-axis second paramater is speed in y-axis
     this.speed = createVector(random(-2, 2), random(-2, 2)); 
     this.size = random(0,10);
-    this.c = random(0, 255);
   }
   // function that moves particles
   move () {
@@ -45,10 +44,18 @@ class particle {
   //display
   display () {
     noStroke();
-    fill(this.c);
+
+    // distance between positions in each axis
+    if (dist(mouseX, mouseY, this.xPos, this.yPos) < 200) {
+      fill(random(250, random (100, 250), random(90, 150)));
+      stroke(random(250, random (100, 250), random(90, 150)));
+    }
+    else {
+      fill('pink');
+      stroke('white');
+    }
     circle( this.xPos, this.yPos, this.size);
-    stroke(this.c);
-    line(this.xPos, this.yPos, windowWidth/2, windowHeight/2)
+    line(this.xPos, this.yPos, width/2, height/2)
   }
 
   // bounce particles around edge of canvas
