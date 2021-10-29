@@ -15,8 +15,11 @@ function draw () {
  // draws particles inside array
  for (let i = 0; i < particleNum; i++) {
    particleSystem[i].move();
-   particleSystem[i].display();
+   particleSystem[i].display('purple');
    particleSystem[i].limit();
+   if (i === 28) {
+     particleSystem[i].display('black');
+   }
  }
 }
 
@@ -31,6 +34,7 @@ class particle {
     // first paramater is speed in x-axis second paramater is speed in y-axis
     this.speed = createVector(random(-2, 2), random(-2, 2)); 
     this.size = random(0,10);
+    this.c = random(0, 255);
   }
   // function that moves particles
   move () {
@@ -40,8 +44,11 @@ class particle {
 
   //display
   display () {
-    fill('purple');
+    noStroke();
+    fill(this.c);
     circle( this.xPos, this.yPos, this.size);
+    stroke(this.c);
+    line(this.xPos, this.yPos, windowWidth/2, windowHeight/2)
   }
 
   // bounce particles around edge of canvas
